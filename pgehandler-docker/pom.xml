@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <prerequisites>
+        <maven>3.0.0</maven>
+    </prerequisites>
+
+    <artifactId>pgehandler-docker</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <groupId>com.wabbitinc.housepower</groupId>
+    <name>House Power PGE Handler</name>
+
+    <parent>
+        <groupId>com.wabbitinc.housepower</groupId>
+        <artifactId>master</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/docker</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../pgehandler/target</directory>
+                                    <includes>
+                                        <include>/pgehandler-1.0.0-SNAPSHOT.jar</include>
+                                    </includes>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../pgehandler</directory>
+                                    <includes>
+                                        <include>example.keystore</include>
+                                        <include>example.yml</include>
+                                    </includes>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>build-docker-image</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <target name="docker-build">
+                                <exec executable="docker">
+                                    <arg value="build"/>
+                                    <arg value="-t"/>
+                                    <arg value="mblevins/power2-pgehandler:1.0.0-SNAPSHOT"/>
+                                    <arg value="target"/>
+                                </exec>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <!--
+        docker run -d -p 8080:8080 -p 8081:8081 power2/pgehandler:1.0
+        curl http://$(docker-machine ip default):8081
+        -->
+    </build>
+
+
+</project>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="docker-build"  >
+<target name="docker-build">
+  <exec executable="docker">
+    <arg value="build"/>
+    <arg value="-t"/>
+    <arg value="mblevins/power2-pgehandler:1.0.0-SNAPSHOT"/>
+    <arg value="target"/>
+  </exec>
+</target>
+</project>
