@@ -1,2 +1,2 @@
 #!/bin/bash
-java -jar ./target/pgehandler.jar server ./example.yml
+java -jar ./pgehandler.jar server ./example.yml
