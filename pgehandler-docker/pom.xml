@@ -68,7 +68,7 @@
                         <phase>package</phase>
                         <configuration>
                             <target name="docker-build">
-                                <exec executable="docker">
+                                <exec executable="docker" failonerror="true">
                                     <arg value="build"/>
                                     <arg value="-t"/>
                                     <arg value="mblevins/homepower-pgehandler:${build.id}"/>
