@@ -16,7 +16,7 @@
 
     <modules>
       <module>pgehandler</module>
-      <module>pgehandler-codedeploy</module>
-      <!-- <module>pgehandler-docker</module> -->
+      <module>pgehandler-docker</module>
+      <!-- <module>pgehandler-codedeploy</module> -->
     </modules>
 </project>

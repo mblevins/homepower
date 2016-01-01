@@ -15,7 +15,7 @@
     <parent>
         <groupId>com.wabbitinc.housepower</groupId>
         <artifactId>master</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
 
@@ -40,7 +40,7 @@
                                 <resource>
                                     <directory>../pgehandler/target</directory>
                                     <includes>
-                                        <include>/pgehandler-1.0.0-SNAPSHOT.jar</include>
+                                        <include>/pgehandler.jar</include>
                                     </includes>
                                     <filtering>false</filtering>
                                 </resource>
@@ -71,7 +71,7 @@
                                 <exec executable="docker">
                                     <arg value="build"/>
                                     <arg value="-t"/>
-                                    <arg value="mblevins/power2-pgehandler:1.0.0-SNAPSHOT"/>
+                                    <arg value="mblevins/homepower-pgehandler:${build.id}"/>
                                     <arg value="target"/>
                                 </exec>
                             </target>

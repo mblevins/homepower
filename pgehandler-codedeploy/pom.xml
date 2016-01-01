@@ -3,7 +3,7 @@
 
 
     <!--
-  Note: this module is currently unused and may be out of date
+  Note: this module was used for aws codedeploy, it is currently unused and may be out of date
     -->
 
     <modelVersion>4.0.0</modelVersion>
@@ -12,7 +12,7 @@
         <maven>3.0.0</maven>
     </prerequisites>
 
-    <artifactId>pgehandler-docker</artifactId>
+    <artifactId>pgehandler-code</artifactId>
     <groupId>com.wabbitinc.housepower</groupId>
     <name>House Power PGE Handler -- Docker</name>
 
