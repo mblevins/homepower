@@ -41,8 +41,64 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <!-- we only do this next one explicitly: antrun:run@zip-ebs-bundle -->
+                    <execution>
+                        <id>zip-ebs-bundle</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <target name="zip-ebs-bundle">
+                                <exec executable="bash" failonerror="true">
+                                    <arg value="-c"/>
+                                    <arg value="cd target; zip bundle.zip Dockerrun.aws.json"/>
+                                </exec>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- we only do this next one explicitly: antrun:run@push-ebs-bundle -->
+                    <execution>
+                        <id>push-ebs-bundle</id>
+                        <configuration>
+                            <target name="push-ebs-bundle">
+                                <exec executable="aws" failonerror="true">
+                                    <arg value="s3"/>
+                                    <arg value="cp"/>
+                                    <arg value="target/bundle.zip"/>
+                                    <arg value="s3://com.wabbitinc.ebs.homepower.test/bundle-${project.version}-${build.id}.zip"/>
+                                </exec>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <!-- we only do this next one explicitly: antrun:run@version-ebs-bundle -->
+                    <execution>
+                        <id>version-ebs-app</id>
+                        <configuration>
+                            <target name="version-ebs-app">
+                                <exec executable="aws" failonerror="true">
+                                    <arg value="create-application-version"/>
+                                    <arg value="--application-name=homepower"/>
+                                    <arg value="--version-label=${project.version}-${build.id}"/>
+                                    <arg value="--source-bundle=S3Bucket=com.wabbitinc.ebs.homepower.test,S3Key=bundle-${project.version}-${build.id}.zip"/>
+                                </exec>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
-
 </project>

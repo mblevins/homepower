@@ -1,13 +1,23 @@
 {
-   "AWSEBDockerrunVersion": "1",
-   "Image": {
-       "Name": "mblevins/homepower-pgehandler:${project.version}-${build.id}",
-       "Update": "true"
-   },
-    "Ports": [
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
         {
-            "ContainerPort": "8080"
+            "name": "pgehandler",
+            "image": "mblevins/homepower-pgehandler:${project.version}-${build.id}",
+            "environment": [
+                {
+                    "name": "mykey",
+                    "value": "myvalue"
+                }
+            ],
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 8080
+                }
+            ],
+            "essential": true,
+            "memory": 300
         }
     ]
-
 }
