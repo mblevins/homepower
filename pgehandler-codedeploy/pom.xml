@@ -44,7 +44,7 @@
                                 <resource>
                                     <directory>../pgehandler/target</directory>
                                     <includes>
-                                        <include>/pgehandler-1.0.0-SNAPSHOT.jar</include>
+                                        <include>/pgehandler.jar</include>
                                     </includes>
                                     <filtering>false</filtering>
                                 </resource>
