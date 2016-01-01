@@ -7,7 +7,7 @@
         <maven>3.0.0</maven>
     </prerequisites>
 
-    <artifactId>pgehandler-docker</artifactId>
+    <artifactId>pgehandler-ebs-docker</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <groupId>com.wabbitinc.housepower</groupId>
     <name>House Power PGE Handler</name>
@@ -34,23 +34,8 @@
                             <outputDirectory>${basedir}/target</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>src/main/docker</directory>
+                                    <directory>src/main/ebs</directory>
                                     <filtering>true</filtering>
-                                </resource>
-                                <resource>
-                                    <directory>../pgehandler/target</directory>
-                                    <includes>
-                                        <include>/pgehandler.jar</include>
-                                    </includes>
-                                    <filtering>false</filtering>
-                                </resource>
-                                <resource>
-                                    <directory>../pgehandler</directory>
-                                    <includes>
-                                        <include>example.keystore</include>
-                                        <include>example.yml</include>
-                                    </includes>
-                                    <filtering>false</filtering>
                                 </resource>
                             </resources>
                         </configuration>
@@ -68,26 +53,11 @@
                         <phase>package</phase>
                         <configuration>
                             <target name="docker-build">
-                                <exec executable="docker" failonerror="true">
+                                <exec executable="docker">
                                     <arg value="build"/>
                                     <arg value="-t"/>
-                                    <arg value="mblevins/homepower-pgehandler:${project.version}-${build.id}"/>
-                                    <arg value="target"/>
-                                </exec>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <!-- we only do this next one explicitly: antrun:run@push-docker-image -->
-                    <execution>
-                        <id>push-docker-image</id>
-                        <configuration>
-                            <target name="docker-push">
-                                <exec executable="docker" failonerror="true">
-                                    <arg value="push"/>
                                     <arg value="mblevins/homepower-pgehandler:${build.id}"/>
+                                    <arg value="target"/>
                                 </exec>
                             </target>
                         </configuration>
