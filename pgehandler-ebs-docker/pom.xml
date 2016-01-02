@@ -80,12 +80,13 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
-                    <!-- we only do this next one explicitly: antrun:run@version-ebs-bundle -->
+                    <!-- we only do this next one explicitly: antrun:run@version-ebs-app -->
                     <execution>
                         <id>version-ebs-app</id>
                         <configuration>
                             <target name="version-ebs-app">
                                 <exec executable="aws" failonerror="true">
+                                    <arg value="elasticbeanstalk"/>
                                     <arg value="create-application-version"/>
                                     <arg value="--application-name"/>
                                     <arg value="homepower-pgehandler"/>
