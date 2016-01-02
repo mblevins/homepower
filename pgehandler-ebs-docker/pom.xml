@@ -87,7 +87,8 @@
                             <target name="version-ebs-app">
                                 <exec executable="aws" failonerror="true">
                                     <arg value="create-application-version"/>
-                                    <arg value="--application-name=homepower-pgehandler"/>
+                                    <arg value="--application-name"/>
+                                    <arg value="homepower-pgehandler"/>
                                     <arg value="--version-label=${project.version}-${build.id}"/>
                                     <arg value="--source-bundle=S3Bucket=com.wabbitinc.ebs.homepower.pgehandler,S3Key=bundle-${project.version}-${build.id}.zip"/>
                                 </exec>
