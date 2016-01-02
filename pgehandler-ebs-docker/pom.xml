@@ -72,7 +72,7 @@
                                     <arg value="s3"/>
                                     <arg value="cp"/>
                                     <arg value="target/bundle.zip"/>
-                                    <arg value="s3://com.wabbitinc.ebs.homepower.pgehandler.test/bundle-${project.version}-${build.id}.zip"/>
+                                    <arg value="s3://com.wabbitinc.ebs.homepower.pgehandler/bundle-${project.version}-${build.id}.zip"/>
                                 </exec>
                             </target>
                         </configuration>
@@ -89,7 +89,7 @@
                                     <arg value="create-application-version"/>
                                     <arg value="--application-name=homepower-pgehandler"/>
                                     <arg value="--version-label=${project.version}-${build.id}"/>
-                                    <arg value="--source-bundle=S3Bucket=com.wabbitinc.ebs.homepower.pgehandler.test,S3Key=bundle-${project.version}-${build.id}.zip"/>
+                                    <arg value="--source-bundle=S3Bucket=com.wabbitinc.ebs.homepower.pgehandler,S3Key=bundle-${project.version}-${build.id}.zip"/>
                                 </exec>
                             </target>
                         </configuration>
